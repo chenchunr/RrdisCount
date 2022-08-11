@@ -25,7 +25,7 @@ func init() {
 		return redis.NewClient(&opt)
 	}
 
-	RedisMain = initRedis("dev-general-01.zenmxapps.com:6384", 1)
+	RedisMain = initRedis("xxx", 1)
 	fmt.Println("init redis success")
 
 }
