@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/csv"
-	"fmt"
 	"net/url"
 	"os"
 	"strconv"
@@ -16,10 +15,10 @@ func main() {
 	var cursor uint64
 	for {
 		keys, cur, err := rds.RedisMain.HScan(key, cursor, "", 100).Result()
-		fmt.Println(keys, "--")
 		if err != nil {
 			break
 		}
+
 		for index := 0; index < len(keys); index += 2 {
 			dom := GetDomain(keys[index])
 			c, _ := strconv.Atoi(keys[index+1])
@@ -33,7 +32,7 @@ func main() {
 		if cur == 0 {
 			break
 		}
-		cursor += 100
+		cursor = cur
 	}
 
 	ImportToCsv(countMap)
